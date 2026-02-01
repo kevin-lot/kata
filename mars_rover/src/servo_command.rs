@@ -19,13 +19,13 @@ impl ServoCommand {
                 };
 
                 match rover.apply(command).check_collision() {
-                    Ok(r) => Ok(r),
-                    Err((r, e)) => {
-                        println!("{}", e);
-                        Err(r)
+                    Ok(rover) => Ok(rover),
+                    Err((rover, message)) => {
+                        println!("{}", message);
+                        Err(rover)
                     }
                 }
             })
-            .unwrap_or_else(|r| r)
+            .unwrap_or_else(|rover| rover)
     }
 }
