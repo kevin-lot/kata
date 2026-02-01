@@ -1,0 +1,7 @@
+[package]
+name = "mars_rover_rust"
+version = "0.1.0"
+edition = "2024"
+
+[dev-dependencies]
+rstest = "0.26.1"
