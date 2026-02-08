@@ -11,32 +11,15 @@ pub struct Rover {
 }
 impl Rover {
     pub fn from(position: Position, planet: Planet) -> Result<Self, String> {
-        if position.get_x() >= planet.get_size().0 || position.get_y() >= planet.get_size().1 {
-            return Err("out of bounds".to_string());
-        }
         let rover = Self { position, planet };
+
+        if !rover.valid_position() {
+            return Err(String::from("out of bounds"));
+        }
 
         match rover.check_collision() {
             Ok(r) => Ok(r),
-            Err(_) => Err("rover crashes directly on a rock".to_string()),
-        }
-    }
-
-    pub fn get_planet(&self) -> Planet {
-        self.planet.clone()
-    }
-
-    pub fn get_position(&self) -> Position {
-        self.position
-    }
-
-    pub fn check_collision(self) -> Result<Self, CheckCollisionError> {
-        let virtual_rock = Rock::from(self.position.get_x(), self.position.get_y());
-        let rocks = self.planet.get_rocks();
-        if rocks.contains(&virtual_rock) {
-            Err((self, "collision with rock".to_string()))
-        } else {
-            Ok(self)
+            Err(_) => Err(String::from("rover crashes directly on a rock")),
         }
     }
 
@@ -61,6 +44,29 @@ impl Rover {
                 planet: self.planet,
             },
         }
+    }
+
+    pub fn check_collision(self) -> Result<Self, CheckCollisionError> {
+        let virtual_rock = Rock::from(self.position.get_x(), self.position.get_y());
+        let rocks = self.planet.get_rocks();
+        if rocks.contains(&virtual_rock) {
+            Err((self, String::from("collision with rock")))
+        } else {
+            Ok(self)
+        }
+    }
+
+    pub fn get_planet(&self) -> Planet {
+        self.planet.clone()
+    }
+
+    pub fn get_position(&self) -> Position {
+        self.position
+    }
+
+    fn valid_position(&self) -> bool {
+        self.position.get_x() < self.planet.get_size().0
+            && self.position.get_y() < self.planet.get_size().1
     }
 }
 
