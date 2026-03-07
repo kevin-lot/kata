@@ -1,4 +1,7 @@
-use crate::orientation::Orientation::{East, North, South, West};
+use crate::orientation::Orientation::East;
+use crate::orientation::Orientation::North;
+use crate::orientation::Orientation::South;
+use crate::orientation::Orientation::West;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum Orientation {

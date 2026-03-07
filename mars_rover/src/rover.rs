@@ -1,5 +1,6 @@
 use crate::command::Command;
-use crate::planet::{Planet, Rock};
+use crate::planet::Planet;
+use crate::planet::Rock;
 use crate::position::Position;
 
 pub type CheckCollisionError = (Rover, String);
