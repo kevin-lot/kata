@@ -1,0 +1,19 @@
+name: simple_poker_hands_rust
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'simple_poker_hands_rust/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: jdx/mise-action@v4
+        with:
+          working_directory: simple_poker_hands_rust
+      - run: mise run test
+        working-directory: simple_poker_hands_rust

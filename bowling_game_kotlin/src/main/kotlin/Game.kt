@@ -25,12 +25,9 @@ class Game {
     private fun frameRollCount(i: Int): Int? =
         when {
             rolls.size <= i -> null
-
             // pick only slot, if it is strike
             rolls[i] == 10 -> 1
-
             rolls.size <= i + 1 -> null
-
             else -> 2
         }
 

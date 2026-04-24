@@ -1,0 +1,9 @@
+[tools]
+rust = "1.95.0"
+
+[tasks]
+fix = ["cargo fix", "cargo fmt", "cargo clippy"]
+run = "cargo run"
+setup = "cargo install cargo-watch"
+test = "cargo test"
+watch = "cargo watch --watch src --clear --quiet --exec test"

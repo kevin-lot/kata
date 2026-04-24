@@ -1,0 +1,19 @@
+name: bowling_game_rust
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'bowling_game_rust/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: jdx/mise-action@v4
+        with:
+          working_directory: bowling_game_rust
+      - run: mise run test
+        working-directory: bowling_game_rust
